@@ -22,7 +22,7 @@ public class WebDriveBuilder implements IBuilder<WebDriver> {
 
     private WebDriveBuilder() {
 
-        this.profileBuilder = new profileBuilder();
+        this.profileBuilder = new profileBuilder().create();
 
     }
 

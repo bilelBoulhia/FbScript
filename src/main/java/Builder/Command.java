@@ -50,7 +50,6 @@ public class Command implements WebActions {
         By by = getBy(selector, findBy);
 
         if (shouldWait) {
-            System.out.println(by);
             return wait.until(ExpectedConditions.elementToBeClickable(by));
         } else {
             return driver.findElement(by);

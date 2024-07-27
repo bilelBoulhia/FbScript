@@ -3,7 +3,9 @@ package org.example;
 import Builder.Command;
 import Builder.SelectorBuilder;
 import Builder.WebDriveBuilder;
-import org.openqa.selenium.*;
+
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
 
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,17 +23,14 @@ public class Main {
     public static Command cmd = new Command(driver);
     public static   String More_btn = selectorBuilder(new Selectordata("button","More",null,null));
     public static    String List_element = selectorBuilder(new Selectordata("listitem",null,null,null));
-    public static   String Leave_Btn = selectorBuilder(new Selectordata("menuitem",null,"Leave Group","x1i10hfl xjbqb8w x1ejq31n xd10rxx x1sy0etr x17r0tee x972fbf xcfux6l x1qhh985 xm0m39n xe8uvvx x1hl2dhg xggy1nq x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x87ps6o x1lku1pv x1a2a7pz xjyslct x9f619 x1ypdohk x78zum5 x1q0g3np x2lah0s x1i6fsjq xfvfia3 xnqzcj9 x1gh759c x1n2onr6 x16tdsg8 x1ja2u2z x6s0dn4 x1y1aw1k xwib8y2 x1q8cg2c xnjli0"));
+    public static   String Leave_Btn = selectorBuilder(new Selectordata("menuitem",null,"Leave Group",null));
     public static   String Leave_Confirm_btn =selectorBuilder(new Selectordata(null,"Leave Group",null,null));
 
 
 
     public static void main(String[] args) {
 
-        if(!Script()){
-            new Throwable("errror");
-            driver.quit();
-        }
+
         driver.quit();
 
     }
@@ -49,11 +48,20 @@ public class Main {
 
             while (!leaveGroupExist && attempts < max) {
                 try {
-                    cmd.clickAction(Leave_Btn,"ByXPath",true);
+                    //if this doesnt work
+                   cmd.clickAction(Leave_Btn,"ByXPath",true);
+
+                   //use this
+//                 WebElement wb = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@role='menuitem']/descendant::span[text()='Leave group']")));
+//                 wb.click();
+
                     leaveGroupExist = true;
                 } catch (TimeoutException e) {
+
+
                     driver.navigate().refresh();
                     cmd.clickAction(More_btn,"ByXPath",true);
+
                     attempts++;
                 }
             }
